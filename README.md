@@ -7,3 +7,7 @@ Requires [SimpleGameEngine](https://github.com/C0deH4cker/SimpleGameEngine).
 
 
 This project is unfinished, but it still works at a minimal level and is fun to play.
+
+
+GIF:
+![Gameplay](http://i.imgur.com/wKMYRJw.gif)

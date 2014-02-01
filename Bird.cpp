@@ -55,7 +55,7 @@ void Bird::update(double deltaTime) {
 	
 	if(bounds.bottom() >= ground) {
 		die();
-		bounds.y = ground - bounds.height;
+		bounds.y = ground - bounds.height + 2.5f;
 	}
 }
 

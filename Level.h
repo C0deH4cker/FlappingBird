@@ -13,7 +13,7 @@
 #include <random>
 #include <Content.h>
 #include <Texture2D.h>
-#include <Timer.h>
+#include <Rectangle.h>
 #include "Pipe.h"
 
 using namespace sge;
@@ -44,6 +44,7 @@ private:
 	Texture2D* pipeTop;
 	Texture2D* pipeBottom;
 	Texture2D* ground;
+	Rectangle groundRect;
 	
 	float distance;
 	std::list<Pipe*> pipes;

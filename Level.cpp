@@ -40,6 +40,9 @@ distribution(0.1f, 0.7f) {
 	ground->width *= 4;
 	ground->height *= 2;
 	
+	Rectangle viewport = Game::instance()->window->getBounds();
+	groundRect = Rectangle(0.0f, viewport.bottom() - ground->height, ground->width, ground->height);
+	
 	bird = new Bird(content, Game::instance()->window->getHeight() - ground->height);
 }
 
@@ -57,6 +60,11 @@ void Level::update(double deltaTime) {
 	bird->update(deltaTime);
 	
 	if(bird->isDead()) return;
+	
+	groundRect.x -= dx;
+	float overlap = Game::instance()->window->getWidth() - groundRect.right();
+	if(overlap > 0.0f)
+		groundRect.x = fmodf(groundRect.x, 28.0f);
 	
 	auto it = pipes.begin();
 	while(it != pipes.end()) {
@@ -98,9 +106,9 @@ void Level::draw(double deltaTime) {
 		(*it)->draw();
 	}
 	
-	ground->draw({0.0f, viewport.bottom() - ground->height, ground->width, ground->height});
-	
 	bird->draw(paused ? deltaTime : 0.0);
+	
+	ground->draw(groundRect);
 }
 
 void Level::charTyped(unsigned char uc) {

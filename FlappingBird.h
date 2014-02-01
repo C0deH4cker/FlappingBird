@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 C0deH4cker. All rights reserved.
 //
 
-#ifndef _FB_FlappingBird_H_
-#define _FB_FlappingBird_H_
+#ifndef _FB_FLAPPINGBIRD_H_
+#define _FB_FLAPPINGBIRD_H_
 
 #include <Game.h>
 #include "Bird.h"
@@ -33,4 +33,4 @@ private:
 };
 
 
-#endif /* _FB_FlappingBird_H_ */
+#endif /* _FB_FLAPPINGBIRD_H_ */

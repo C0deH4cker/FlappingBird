@@ -1,13 +1,13 @@
 //
-//  FlappyBird.h
-//  FlappyBird
+//  FlappingBird.h
+//  FlappingBird
 //
 //  Created by C0deH4cker on 1/30/14.
 //  Copyright (c) 2014 C0deH4cker. All rights reserved.
 //
 
-#ifndef _FB_FLAPPYBIRD_H_
-#define _FB_FLAPPYBIRD_H_
+#ifndef _FB_FlappingBird_H_
+#define _FB_FlappingBird_H_
 
 #include <Game.h>
 #include "Bird.h"
@@ -15,12 +15,12 @@
 
 using namespace sge;
 
-class FlappyBird: public virtual Game {
+class FlappingBird: public virtual Game {
 public:
 	Content content;
 	
-	FlappyBird();
-	~FlappyBird();
+	FlappingBird();
+	~FlappingBird();
 	
 	void initialize();
 	void update(double deltaTime);
@@ -33,4 +33,4 @@ private:
 };
 
 
-#endif /* _FB_FLAPPYBIRD_H_ */
+#endif /* _FB_FlappingBird_H_ */

@@ -1,6 +1,6 @@
 //
 //  Level.cpp
-//  FlappyBird
+//  FlappingBird
 //
 //  Created by C0deH4cker on 1/30/14.
 //  Copyright (c) 2014 C0deH4cker. All rights reserved.
@@ -14,7 +14,7 @@
 #include <time.h>
 #include <Timer.h>
 #include "Pipe.h"
-#include "FlappyBird.h"
+#include "FlappingBird.h"
 
 using namespace sge;
 

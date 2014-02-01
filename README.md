@@ -10,4 +10,5 @@ This project is unfinished, but it still works at a minimal level and is fun to 
 
 
 GIF:
+
 ![Gameplay](http://i.imgur.com/wKMYRJw.gif)

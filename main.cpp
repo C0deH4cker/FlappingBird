@@ -12,3 +12,4 @@ int main() {
 	FlappingBird* game = new FlappingBird();
 	return game->run();
 }
+

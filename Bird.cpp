@@ -50,9 +50,6 @@ void Bird::update(double deltaTime) {
 	if(speed > maxSpeed)
 		speed = maxSpeed;
 	
-	if(bounds.top() < 0.0f)
-		bounds.y = 0.0f;
-	
 	if(bounds.bottom() >= ground) {
 		die();
 		bounds.y = ground - bounds.height + 2.5f;
@@ -66,6 +63,7 @@ void Bird::draw(double deltaTime) {
 
 void Bird::flap() {
 	if(dead) return;
+	if(bounds.top() < 0.0f) return; 
 	speed = flapSpeed;
 }
 

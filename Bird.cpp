@@ -16,9 +16,9 @@
 using namespace sge;
 
 
-const float Bird::flapSpeed = -480.0f;
-const float Bird::maxSpeed = 650.0f;
-const float Bird::gravity = 1600.0f;
+const float Bird::flapSpeed = -500.0f;
+const float Bird::maxSpeed = 680.0f;
+const float Bird::gravity = 2000.0f;
 
 Bird::Bird(const Content& content, float groundHeight)
 : speed(0.0f), ground(groundHeight) {
@@ -63,7 +63,7 @@ void Bird::draw(double deltaTime) {
 
 void Bird::flap() {
 	if(dead) return;
-	if(bounds.top() < 0.0f) return; 
+	if(bounds.top() < 0.0f) return;
 	speed = flapSpeed;
 }
 

@@ -19,7 +19,7 @@
 using namespace sge;
 
 
-const int Level::scrollSpeed = 200;
+const int Level::scrollSpeed = 240;
 const float Level::pipeDistance = 240.0f;
 const float Level::pipeSpread = 65.0f;
 

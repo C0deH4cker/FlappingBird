@@ -33,6 +33,7 @@ public:
 	
 	void pause();
 	void resume();
+	bool isPaused() const;
 	void restart();
 	
 private:

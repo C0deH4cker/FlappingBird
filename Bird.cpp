@@ -21,7 +21,7 @@ const float Bird::maxSpeed = 680.0f;
 const float Bird::gravity = 2000.0f;
 
 Bird::Bird(const Content& content, float groundHeight)
-: speed(0.0f), ground(groundHeight) {
+: speed(0.0f), ground(groundHeight), dead(false), started(false) {
 	texture = content.load<Texture2D>("bird.png", GL_NEAREST);
 	
 	Window* window = Game::instance()->window;
@@ -50,19 +50,28 @@ void Bird::update(double deltaTime) {
 	if(speed > maxSpeed)
 		speed = maxSpeed;
 	
-	if(bounds.bottom() >= ground) {
+	if(bounds.midY() + bounds.width / 2.0f >= ground) {
 		die();
-		bounds.y = ground - bounds.height + 2.5f;
+		bounds.y = ground + 2.5f - (bounds.width + bounds.height) / 2.0f;
 	}
 }
 
 void Bird::draw(double deltaTime) {
 	// TODO: add animation
-	texture->draw(bounds);
+	float rotation = 0.0f;
+	if(started) {
+		if(speed < maxSpeed * 0.15f)
+			rotation = -M_PI / 10.0f;
+		else
+			rotation = speed*speed / (maxSpeed*maxSpeed) * M_PI_2;
+	}
+	
+	texture->draw(bounds, rotation);
 }
 
 void Bird::flap() {
 	if(dead) return;
+	started = true;
 	if(bounds.top() < 0.0f) return;
 	speed = flapSpeed;
 }
@@ -76,6 +85,7 @@ void Bird::reset() {
 	bounds.y = startingPos.y;
 	speed = 0.0f;
 	dead = false;
+	started = false;
 }
 
 bool Bird::isDead() const {

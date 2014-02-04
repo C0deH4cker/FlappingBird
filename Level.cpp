@@ -19,7 +19,7 @@
 using namespace sge;
 
 
-const int Level::scrollSpeed = 240;
+const int Level::scrollSpeed = 230;
 const float Level::pipeDistance = 240.0f;
 const float Level::pipeSpread = 65.0f;
 
@@ -41,9 +41,11 @@ distribution(0.1f, 0.7f) {
 	ground->height *= 2;
 	
 	Rectangle viewport = Game::instance()->window->getBounds();
-	groundRect = Rectangle(0.0f, viewport.bottom() - ground->height, ground->width, ground->height);
+	groundRect = Rectangle(0.0f, viewport.bottom() - ground->height,
+						   ground->width, ground->height);
 	
-	bird = new Bird(content, Game::instance()->window->getHeight() - ground->height);
+	bird = new Bird(content,
+					Game::instance()->window->getHeight() - ground->height);
 }
 
 Level::~Level() {
@@ -138,6 +140,10 @@ void Level::pause() {
 
 void Level::resume() {
 	paused = false;
+}
+
+bool Level::isPaused() const {
+	return paused;
 }
 
 void Level::restart() {

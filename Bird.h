@@ -34,6 +34,7 @@ public:
 private:
 	const static float flapSpeed, maxSpeed, gravity;
 	bool dead;
+	bool started;
 	Vector2 startingPos;
 	Rectangle bounds;
 	float ground;

@@ -24,8 +24,8 @@ const float Level::pipeDistance = 240.0f;
 const float Level::pipeSpread = 65.0f;
 
 Level::Level(const Content& content)
-: distance(0.0f), rng((unsigned)time(NULL)), paused(true), score(0),
-distribution(0.1f, 0.7f) {
+: distance(0.0f), rng((unsigned)time(NULL)), paused(false), started(false),
+score(0), distribution(0.1f, 0.7f) {
 	background = content.load<Texture2D>("background.png", GL_NEAREST);
 	 
 	pipeTop = content.load<Texture2D>("pipe_top.png", GL_NEAREST);
@@ -59,14 +59,19 @@ void Level::update(double deltaTime) {
 	if(paused) return;
 	
 	float dx = scrollSpeed * deltaTime;
+	
+	if(!bird->isDead()) {
+		groundRect.x -= dx;
+		float overlap = Game::instance()->window->getWidth() - groundRect.right();
+		if(overlap > 0.0f)
+			groundRect.x = fmodf(groundRect.x, 28.0f);
+	}
+	
+	if(!started) return;
+	
 	bird->update(deltaTime);
 	
 	if(bird->isDead()) return;
-	
-	groundRect.x -= dx;
-	float overlap = Game::instance()->window->getWidth() - groundRect.right();
-	if(overlap > 0.0f)
-		groundRect.x = fmodf(groundRect.x, 28.0f);
 	
 	auto it = pipes.begin();
 	while(it != pipes.end()) {
@@ -108,7 +113,7 @@ void Level::draw(double deltaTime) {
 		(*it)->draw();
 	}
 	
-	bird->draw(paused ? deltaTime : 0.0);
+	bird->draw(paused ? 0.0 : deltaTime);
 	
 	ground->draw(groundRect);
 }
@@ -118,6 +123,8 @@ void Level::charTyped(unsigned char uc) {
 		case ' ':
 			if(paused)
 				resume();
+			if(!started)
+				started = true;
 			bird->flap();
 			break;
 		
@@ -152,7 +159,8 @@ void Level::restart() {
 	distance = 0.0f;
 	pipes.clear();
 	score = 0;
-	paused = true;
+	paused = false;
+	started = false;
 }
 
 void Level::addPipe(float scrolled) {

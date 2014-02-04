@@ -39,6 +39,7 @@ private:
 	Rectangle bounds;
 	float ground;
 	float speed;
+	double elapsed;
 	Texture2D* texture;
 };
 

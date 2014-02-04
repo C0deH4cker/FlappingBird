@@ -40,6 +40,7 @@ private:
 	Bird* bird;
 	int score;
 	bool paused;
+	bool started;
 	
 	Texture2D* background;
 	Texture2D* pipeTop;

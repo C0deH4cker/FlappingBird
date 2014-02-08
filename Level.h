@@ -16,6 +16,7 @@
 #include <Sprite.h>
 #include <Rectangle.h>
 #include "Pipe.h"
+#include "Score.h"
 
 using namespace sge;
 
@@ -39,12 +40,12 @@ public:
 	
 private:
 	Bird* bird;
-	int score;
 	bool paused;
 	bool started;
 	
 	Rectangle viewport;
 	Texture2D* sprites;
+	Score score;
 	Sprite background;
 	Sprite pipeTop;
 	Sprite pipeBottom;

@@ -25,8 +25,9 @@ const float Level::pipeSpread = 65.0f;
 
 Level::Level(const Content& content, Rectangle bounds)
 : distance(0.0f), rng((unsigned)time(NULL)), paused(false), started(false),
-score(0), distribution(0.1f, 0.7f), viewport(bounds),
+distribution(0.1f, 0.7f), viewport(bounds),
 sprites(content.load<Texture2D>("spritesheet.png", GL_NEAREST)),
+score(sprites),
 background(sprites, {0.0f, 0.0f, 144.0f, 256.0f}),
 pipeTop(sprites, {302.0f, 0.0f, 26.0f, 135.0f}),
 pipeBottom(sprites, {330.0f, 0.0f, 26.0f, 121.0f}),
@@ -62,10 +63,8 @@ void Level::update(double deltaTime) {
 	while(it != pipes.end()) {
 		(*it)->scroll(dx);
 		
-		if((*it)->didScore(bird)) {
-			score++;
-			std::cout << "Score: " << score << std::endl;
-		}
+		if((*it)->didScore(bird))
+			++score;
 		
 		if((*it)->collides(bird)) {
 			bird->die();
@@ -100,6 +99,8 @@ void Level::draw(double deltaTime) {
 	bird->draw(paused ? 0.0 : deltaTime);
 	
 	ground.draw(groundRect);
+	
+	score.draw();
 }
 
 void Level::charTyped(unsigned char uc) {

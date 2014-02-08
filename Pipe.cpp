@@ -13,17 +13,17 @@
 using namespace sge;
 
 
-Pipe::Pipe(const Vector2& pos, Texture2D* topImage, Texture2D* bottomImage)
+Pipe::Pipe(const Vector2& pos, const Sprite* topImage, const Sprite* bottomImage)
 : top(topImage), bottom(bottomImage), scored(false) {
 	topRect    = Rectangle(pos.x,
-						   pos.y - top->height - Level::pipeSpread,
-						   top->width,
-						   top->height);
+						   pos.y - 3.0f * top->getHeight() - Level::pipeSpread,
+						   3.0f * top->getWidth(),
+						   3.0f * top->getHeight());
 	
 	bottomRect = Rectangle(topRect.x,
 						   pos.y + Level::pipeSpread,
-						   bottom->width,
-						   bottom->height);
+						   3.0f * bottom->getWidth(),
+						   3.0f * bottom->getHeight());
 }
 
 void Pipe::scroll(float x) {

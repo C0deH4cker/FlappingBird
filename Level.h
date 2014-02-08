@@ -13,6 +13,7 @@
 #include <random>
 #include <Content.h>
 #include <Texture2D.h>
+#include <Sprite.h>
 #include <Rectangle.h>
 #include "Pipe.h"
 
@@ -24,7 +25,7 @@ public:
 	const static float pipeDistance;
 	const static float pipeSpread;
 	
-	Level(const Content& content);
+	Level(const Content& content, Rectangle bounds);
 	~Level();
 	
 	void update(double deltaTime);
@@ -42,10 +43,12 @@ private:
 	bool paused;
 	bool started;
 	
-	Texture2D* background;
-	Texture2D* pipeTop;
-	Texture2D* pipeBottom;
-	Texture2D* ground;
+	Rectangle viewport;
+	Texture2D* sprites;
+	Sprite background;
+	Sprite pipeTop;
+	Sprite pipeBottom;
+	Sprite ground;
 	Rectangle groundRect;
 	
 	float distance;

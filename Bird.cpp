@@ -20,25 +20,19 @@ const float Bird::flapSpeed = -500.0f;
 const float Bird::maxSpeed = 680.0f;
 const float Bird::gravity = 2000.0f;
 
-Bird::Bird(const Content& content, float groundHeight)
-: speed(0.0f), ground(groundHeight), dead(false),
-started(false), elapsed(0.0) {
-	texture = content.load<Texture2D>("bird.png", GL_NEAREST);
-	
+Bird::Bird(const Texture2D* sprites, float groundHeight)
+: speed(0.0f), ground(groundHeight), dead(false), started(false), elapsed(0.0),
+img(sprites, {264.0f, 90.0f, 17.0f, 12.0f}) {
 	Window* window = Game::instance()->window;
 	float x = window->getWidth() / 5.0f;
 	float y = window->getHeight() / 2.0f;
 	
-	bounds.width = 2.5f * texture->width;
-	bounds.height = 2.5f * texture->height;
+	bounds.width = 2.5f * img.getWidth();
+	bounds.height = 2.5f * img.getHeight();
 	bounds.x = x - bounds.width / 2.0f;
 	bounds.y = y - bounds.height / 2.0f;
 	
 	startingPos = bounds.topLeft();
-}
-
-Bird::~Bird() {
-	delete texture;
 }
 
 void Bird::update(double deltaTime) {
@@ -66,15 +60,15 @@ void Bird::draw(double deltaTime) {
 		else
 			rotation = speed*speed / (maxSpeed*maxSpeed) * M_PI_2;
 		
-		texture->draw(bounds, rotation);
+		img.draw(bounds, rotation);
 	}
 	else {
 		elapsed += deltaTime;
 		
 		Rectangle frame(bounds);
-		frame.y += 10.0f * sin(8.0 * elapsed);
+		frame.y += 10.0f * sinf(8.0f * elapsed);
 		
-		texture->draw(frame);
+		img.draw(frame);
 	}
 }
 

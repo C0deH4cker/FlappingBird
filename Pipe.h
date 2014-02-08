@@ -18,7 +18,7 @@ using namespace sge;
 
 class Pipe {
 public:
-	Pipe(const Vector2& pos, Texture2D* topImage, Texture2D* bottomImage);
+	Pipe(const Vector2& pos, const Sprite* topImage, const Sprite* bottomImage);
 	
 	void scroll(float x);
 	void draw();
@@ -28,9 +28,9 @@ public:
 	
 private:
 	bool scored;
-	Texture2D* top;
+	const Sprite* top;
 	Rectangle topRect;
-	Texture2D* bottom;
+	const Sprite* bottom;
 	Rectangle bottomRect;
 };
 

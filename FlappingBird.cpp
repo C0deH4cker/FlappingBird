@@ -23,7 +23,7 @@ FlappingBird::~FlappingBird() {
 }
 
 void FlappingBird::initialize() {
-	level = new Level(content);
+	level = new Level(content, Game::instance()->window->getBounds());
 }
 
 void FlappingBird::update(double deltaTime) {

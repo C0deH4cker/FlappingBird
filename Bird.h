@@ -12,13 +12,13 @@
 #include <Rectangle.h>
 #include <Content.h>
 #include <Texture2D.h>
+#include <Sprite.h>
 
 using namespace sge;
 
 class Bird {
 public:
-	Bird(const Content& content, float groundHeight);
-	~Bird();
+	Bird(const Texture2D* sprites, float groundHeight);
 	
 	void update(double deltaTime);
 	void draw(double deltaTime);
@@ -40,7 +40,7 @@ private:
 	float ground;
 	float speed;
 	double elapsed;
-	Texture2D* texture;
+	Sprite img;
 };
 
 

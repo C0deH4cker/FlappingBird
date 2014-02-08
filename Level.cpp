@@ -23,36 +23,21 @@ const int Level::scrollSpeed = 230;
 const float Level::pipeDistance = 240.0f;
 const float Level::pipeSpread = 65.0f;
 
-Level::Level(const Content& content)
+Level::Level(const Content& content, Rectangle bounds)
 : distance(0.0f), rng((unsigned)time(NULL)), paused(false), started(false),
-score(0), distribution(0.1f, 0.7f) {
-	background = content.load<Texture2D>("background.png", GL_NEAREST);
-	 
-	pipeTop = content.load<Texture2D>("pipe_top.png", GL_NEAREST);
-	pipeTop->width *= 3;
-	pipeTop->height *= 3;
-	
-	pipeBottom = content.load<Texture2D>("pipe_bottom.png", GL_NEAREST);
-	pipeBottom->width *= 3;
-	pipeBottom->height *= 3;
-	
-	ground = content.load<Texture2D>("ground.png", GL_NEAREST);
-	ground->width *= 4;
-	ground->height *= 2;
-	
-	Rectangle viewport = Game::instance()->window->getBounds();
-	groundRect = Rectangle(0.0f, viewport.bottom() - ground->height,
-						   ground->width, ground->height);
-	
-	bird = new Bird(content,
-					Game::instance()->window->getHeight() - ground->height);
+score(0), distribution(0.1f, 0.7f), viewport(bounds),
+sprites(content.load<Texture2D>("spritesheet.png", GL_NEAREST)),
+background(sprites, {0.0f, 0.0f, 144.0f, 256.0f}),
+pipeTop(sprites, {302.0f, 0.0f, 26.0f, 135.0f}),
+pipeBottom(sprites, {330.0f, 0.0f, 26.0f, 121.0f}),
+ground(sprites, {146.0f, 0.0f, 156.0f, 54.0f}),
+groundRect(0.0f, viewport.height - 2.0f * ground.getHeight(),
+		   4.0f * ground.getWidth(), 2.0f * ground.getHeight()) {
+	bird = new Bird(sprites, viewport.height - 2.0f * ground.getHeight());
 }
 
 Level::~Level() {
-	delete background;
-	delete pipeTop;
-	delete pipeBottom;
-	delete ground;
+	delete sprites;
 }
 
 void Level::update(double deltaTime) {
@@ -62,7 +47,7 @@ void Level::update(double deltaTime) {
 	
 	if(!bird->isDead()) {
 		groundRect.x -= dx;
-		float overlap = Game::instance()->window->getWidth() - groundRect.right();
+		float overlap = viewport.width - groundRect.right();
 		if(overlap > 0.0f)
 			groundRect.x = fmodf(groundRect.x, 28.0f);
 	}
@@ -106,8 +91,7 @@ void Level::update(double deltaTime) {
 }
 
 void Level::draw(double deltaTime) {
-	Rectangle viewport = Game::instance()->window->getBounds();
-	background->draw(viewport);
+	background.draw(viewport);
 	
 	for(auto it = pipes.begin(); it != pipes.end(); ++it) {
 		(*it)->draw();
@@ -115,7 +99,7 @@ void Level::draw(double deltaTime) {
 	
 	bird->draw(paused ? 0.0 : deltaTime);
 	
-	ground->draw(groundRect);
+	ground.draw(groundRect);
 }
 
 void Level::charTyped(unsigned char uc) {
@@ -166,15 +150,12 @@ void Level::restart() {
 void Level::addPipe(float scrolled) {
 	float x, y;
 	
-	Window* window = Game::instance()->window;
-	float screenHeight = window->getHeight();
-	
-	x = window->getWidth() - scrolled;
+	x = viewport.width - scrolled;
 	
 	/* arcsin(2x-1)/pi+0.5 */
-	y = screenHeight * (asinf(2.0f * distribution(rng) - 1.0f) / M_PI + 0.5f);
+	y = viewport.height * (asinf(2.0f * distribution(rng) - 1.0f) / M_PI + 0.5f);
 	
-	Pipe* pipe = new Pipe(Vector2(x, y), pipeTop, pipeBottom);
+	Pipe* pipe = new Pipe(Vector2(x, y), &pipeTop, &pipeBottom);
 	pipes.push_back(pipe);
 }
 

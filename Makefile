@@ -24,8 +24,8 @@ CXXFLAGS := -Wall \
 
 override CXXFLAGS += -std=c++11 -I./$(SGE)/include
 
-LDFLAGS := $(shell grep Libs.private $(SGE)/glfw/src/glfw3.pc | cut -d' ' -f2-)
-LDFLAGS += -L/opt/local/lib -lpng
+GLFWDEPS = $(shell grep Libs.private $(SGE)/glfw/src/glfw3.pc | cut -d' ' -f2-)
+LDFLAGS := -L/opt/local/lib -lpng
 
 all: $(GAME)
 
@@ -35,20 +35,26 @@ $(BUILD):
 spritesheet.png:
 	curl -o $@ http://www.spriters-resource.com/resources/sheets/56/59537.png
 
-$(SGE):
+sge:
 	git submodule update --init
 
-$(LIBSGE): $(SGE)
+$(LIBSGE): sge
 	$(MAKE) -C $(SGE)
 
 $(GAME): $(LIBSGE) $(OBJS) | spritesheet.png
-	$(CXX) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(GLFWDEPS) $(LDFLAGS)
 
 $(BUILD)/%.o: %.cpp | $(BUILD)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
+gitupdate:
+	git pull
+	git submodule update --init
+
+update: gitupdate all
+
 clean:
 	rm -rf $(BUILD) flappingbird
 
-.PHONY: all clean
+.PHONY: all clean gitupdate sge update
 

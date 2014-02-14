@@ -35,10 +35,7 @@ $(BUILD):
 spritesheet.png:
 	curl -o $@ http://www.spriters-resource.com/resources/sheets/56/59537.png
 
-sge:
-	git submodule update --init
-
-$(LIBSGE): sge
+$(LIBSGE):
 	$(MAKE) -C $(SGE)
 
 $(GAME): $(LIBSGE) $(OBJS) | spritesheet.png
@@ -47,14 +44,8 @@ $(GAME): $(LIBSGE) $(OBJS) | spritesheet.png
 $(BUILD)/%.o: %.cpp | $(BUILD)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-gitupdate:
-	git pull
-	git submodule update --init
-
-update: gitupdate all
-
 clean:
 	rm -rf $(BUILD) flappingbird
 
-.PHONY: all clean gitupdate sge update
+.PHONY: all clean
 

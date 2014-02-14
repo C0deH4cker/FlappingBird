@@ -17,6 +17,4 @@ GIF:
 
 ## Building ##
 
-Eventually, I may add a Makefile here, but for now, this is the way I have my Xcode projects setup in order to compile this project successfully (disregard the difference of project name, I changed it after creating the project).
-
-![Xcode setup](http://i.imgur.com/ohX59gO.png)
+Just clone this repo, then run `make`. That's it!

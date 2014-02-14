@@ -28,7 +28,7 @@ Score::Score(const Texture2D* sprites)
 	{sprites, {165.0f, 245.0f, w, h}}, // 6
 	{sprites, {175.0f, 245.0f, w, h}}, // 7
 	{sprites, {185.0f, 245.0f, w, h}}, // 8
-	{sprites, {195.0f, 245.0f, w, h}}, // 9
+	{sprites, {195.0f, 245.0f, w, h}}  // 9
 } {}
 
 Score& Score::operator=(int points) {
@@ -51,7 +51,7 @@ void Score::draw() const {
 	float left = midX - total / 2.0f;
 	float step = scale * (spacing + w);
 	
-	for(int i = 0; i < disp.size(); ++i) {
+	for(unsigned i = 0; i < disp.size(); ++i) {
 		int dig = disp[i] - '0';
 		digits[dig].draw({left + i * step, viewport.height * 0.02f,
 		                scale * w, scale * h});

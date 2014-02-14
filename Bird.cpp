@@ -20,15 +20,22 @@ const float Bird::flapSpeed = -500.0f;
 const float Bird::maxSpeed = 680.0f;
 const float Bird::gravity = 2000.0f;
 
+const float w = 17.0f, h = 12.0f;
+
 Bird::Bird(const Texture2D* sprites, float groundHeight)
 : speed(0.0f), ground(groundHeight), dead(false), started(false), elapsed(0.0),
-img(sprites, {264.0f, 90.0f, 17.0f, 12.0f}) {
+flaptime(0.0),
+frames{
+	{sprites, {223.0f, 124.0f, w, h}}, // wing down
+	{sprites, {264.0f,  90.0f, w, h}}, // wing center
+	{sprites, {264.0f,  64.0f, w, h}}  // wing top
+} {
 	Window* window = Game::instance()->window;
 	float x = window->getWidth() / 5.0f;
 	float y = window->getHeight() / 2.0f;
 	
-	bounds.width = 2.5f * img.getWidth();
-	bounds.height = 2.5f * img.getHeight();
+	bounds.width = 2.5f * w;
+	bounds.height = 2.5f * h;
 	bounds.x = x - bounds.width / 2.0f;
 	bounds.y = y - bounds.height / 2.0f;
 	
@@ -36,7 +43,6 @@ img(sprites, {264.0f, 90.0f, 17.0f, 12.0f}) {
 }
 
 void Bird::update(double deltaTime) {
-	// TODO: add death animation
 	speed += gravity * deltaTime / 2.0f;
 	if(speed > maxSpeed)
 		speed = maxSpeed;
@@ -52,7 +58,8 @@ void Bird::update(double deltaTime) {
 }
 
 void Bird::draw(double deltaTime) {
-	// TODO: add animation
+	int i;
+	
 	if(started) {
 		float rotation;
 		if(speed < maxSpeed * 0.15f)
@@ -60,15 +67,28 @@ void Bird::draw(double deltaTime) {
 		else
 			rotation = speed*speed / (maxSpeed*maxSpeed) * M_PI_2;
 		
-		img.draw(bounds, rotation);
+		frames[1].draw(bounds, rotation);
 	}
 	else {
 		elapsed += deltaTime;
+		flaptime += deltaTime;
 		
 		Rectangle frame(bounds);
-		frame.y += 10.0f * sinf(8.0f * elapsed);
+		frame.y += 6.0f * sinf(8.0f * elapsed);
 		
-		img.draw(frame);
+		if(dead) {
+			frames[1].draw(frame);
+		}
+		else {
+			if(flaptime > 0.5) {
+				flaptime = fmod(flaptime, 0.5);
+			}
+			
+			// 100 flaps in 46 seconds, so about 1/6 seconds for each frame
+			// Yes, I actually used a stopwatch and counted. Get over it.
+			i = (int)(flaptime * 6);
+			frames[i].draw(frame);
+		}
 	}
 }
 

@@ -40,7 +40,8 @@ private:
 	float ground;
 	float speed;
 	double elapsed;
-	Sprite img;
+	double flaptime;
+	Sprite frames[3];
 };
 
 

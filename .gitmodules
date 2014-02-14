@@ -1,0 +1,3 @@
+[submodule "SimpleGameEngine"]
+	path = SimpleGameEngine
+	url = https://github.com/C0deH4cker/SimpleGameEngine.git

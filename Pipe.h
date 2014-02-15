@@ -9,9 +9,7 @@
 #ifndef _FB_PIPE_H_
 #define _FB_PIPE_H_
 
-#include <Vector2.h>
-#include <Texture2D.h>
-#include <Rectangle.h>
+#include <sge.h>
 #include "Bird.h"
 
 using namespace sge;

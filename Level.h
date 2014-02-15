@@ -11,10 +11,7 @@
 
 #include <list>
 #include <random>
-#include <Content.h>
-#include <Texture2D.h>
-#include <Sprite.h>
-#include <Rectangle.h>
+#include <sge.h>
 #include "Pipe.h"
 #include "Score.h"
 

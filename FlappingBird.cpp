@@ -7,8 +7,8 @@
 //
 
 #include "FlappingBird.h"
-#include <Color.h>
 #include <random>
+#include <sge.h>
 
 using namespace sge;
 

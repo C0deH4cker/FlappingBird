@@ -7,7 +7,7 @@
 //
 
 #include "Pipe.h"
-#include <Content.h>
+#include <sge.h>
 #include "FlappingBird.h"
 
 using namespace sge;

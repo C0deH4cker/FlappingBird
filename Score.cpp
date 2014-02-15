@@ -7,8 +7,8 @@
 //
 
 #include "Score.h"
-#include "Game.h"
 #include <string>
+#include <sge.h>
 
 using namespace sge;
 

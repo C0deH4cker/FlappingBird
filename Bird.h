@@ -9,10 +9,7 @@
 #ifndef _FB_BIRD_H_
 #define _FB_BIRD_H_
 
-#include <Rectangle.h>
-#include <Content.h>
-#include <Texture2D.h>
-#include <Sprite.h>
+#include <sge.h>
 
 using namespace sge;
 

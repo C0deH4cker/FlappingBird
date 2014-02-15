@@ -9,10 +9,9 @@
 #include "Level.h"
 #include <random>
 #include <iostream>
-#include <OpenGL/gl.h>
 #include <math.h>
 #include <time.h>
-#include <Timer.h>
+#include <sge.h>
 #include "Pipe.h"
 #include "FlappingBird.h"
 
@@ -161,6 +160,6 @@ void Level::addPipe(float scrolled) {
 }
 
 void Level::showScore() {
-	// TODO: implement score
+	// TODO: implement final score display
 }
 

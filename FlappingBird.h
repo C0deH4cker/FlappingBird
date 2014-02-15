@@ -9,7 +9,7 @@
 #ifndef _FB_FLAPPINGBIRD_H_
 #define _FB_FLAPPINGBIRD_H_
 
-#include <Game.h>
+#include <sge.h>
 #include "Bird.h"
 #include "Level.h"
 

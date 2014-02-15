@@ -9,9 +9,7 @@
 #ifndef _FB_SCORE_H_
 #define _FB_SCORE_H_
 
-#include <Content.h>
-#include <Texture2D.h>
-#include <Sprite.h>
+#include <sge.h>
 
 using namespace sge;
 

@@ -7,10 +7,7 @@
 //
 
 #include "Bird.h"
-#include <OpenGL/gl.h>
-#include <Game.h>
-#include <Texture2D.h>
-#include <helpers.h>
+#include <sge.h>
 #include "FlappingBird.h"
 
 using namespace sge;

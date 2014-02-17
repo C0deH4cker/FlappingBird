@@ -30,9 +30,9 @@ score(sprites),
 background(sprites, {0.0f, 0.0f, 144.0f, 256.0f}),
 pipeTop(sprites, {302.0f, 0.0f, 26.0f, 135.0f}),
 pipeBottom(sprites, {330.0f, 0.0f, 26.0f, 121.0f}),
-ground(sprites, {146.0f, 0.0f, 156.0f, 54.0f}),
+ground(sprites, {146.0f, 0.0f, 154.0f, 54.0f}),
 groundRect(0.0f, viewport.height - 2.0f * ground.getHeight(),
-		   4.0f * ground.getWidth(), 2.0f * ground.getHeight()) {
+		   4.0f * ground.getWidth(), 3.0f * ground.getHeight()) {
 	bird = new Bird(sprites, viewport.height - 2.0f * ground.getHeight());
 }
 
@@ -113,7 +113,10 @@ void Level::charTyped(unsigned char uc) {
 			break;
 		
 		case 'p':
-			paused = !paused;
+			if(paused)
+				resume();
+			else
+				pause();
 			break;
 		
 		case 'r':
@@ -127,10 +130,12 @@ void Level::charTyped(unsigned char uc) {
 
 void Level::pause() {
 	paused = true;
+	bird->pause();
 }
 
 void Level::resume() {
 	paused = false;
+	bird->resume();
 }
 
 bool Level::isPaused() const {

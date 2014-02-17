@@ -23,6 +23,8 @@ public:
 	void flap();
 	void die();
 	void reset();
+	void pause();
+	void resume();
 	
 	bool isDead() const;
 	
@@ -30,15 +32,20 @@ public:
 	
 private:
 	const static float flapSpeed, maxSpeed, gravity;
-	bool dead;
-	bool started;
+	const static double defaultFps;
+	double fps, extra;
+	bool dead, started, paused, onGround;
 	Vector2 startingPos;
 	Rectangle bounds;
 	float ground;
 	float speed;
-	double elapsed;
-	double flaptime;
+	int curFrame;
+	Timer timer, wingTimer;
 	Sprite frames[3];
+	
+	float getRotation() const;
+	void setFlapsPerSec(double fps);
+	int getFrame();
 };
 
 

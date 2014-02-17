@@ -93,7 +93,6 @@ void Bird::flap() {
 	started = true;
 	timer.reset();
 	wingTimer.reset();
-	setFlapsPerSec(maxFps);
 	if(bounds.top() < 0.0f) return;
 	speed = flapSpeed;
 }

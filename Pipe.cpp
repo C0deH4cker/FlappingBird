@@ -37,9 +37,37 @@ void Pipe::draw() {
 }
 
 bool Pipe::collides(const Bird* bird) const {
-	const Rectangle& rect(bird->getBounds());
+	const Rectangle& rect(bird->getBBox());
 	
-	return rect.intersects(topRect) || rect.intersects(bottomRect);
+	// Perform bounding box collision detection
+	if(rect.intersects(topRect) || rect.intersects(bottomRect)) {
+		// Do more accurate circle-box collision detection
+		Vector2 center = rect.center();
+		
+		// Hit the side of a pipe
+		if(center.y >= topRect.bottom() || center.y <= bottomRect.top())
+			return true;
+		
+		// X is between the pipes
+		if(center.x >= topRect.left() && center.x <= topRect.right()) {
+			if(rect.top() <= topRect.bottom() ||
+			   rect.bottom() >= bottomRect.top()) {
+				return true;
+			}
+		}
+		
+		float radius = rect.width / 2.0f;
+		float r2 = radius*radius;
+		
+		if(center.sqrdistance(topRect.bottomLeft()) > r2 &&
+		   center.sqrdistance(bottomRect.bottomLeft()) > r2 &&
+		   center.sqrdistance(topRect.bottomLeft()) > r2 &&
+		   center.sqrdistance(bottomRect.topRight()) > r2) {
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 bool Pipe::didScore(const Bird* bird) {

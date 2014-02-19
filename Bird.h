@@ -29,6 +29,7 @@ public:
 	bool isDead() const;
 	
 	const Rectangle& getBounds() const;
+	Rectangle getBBox() const;
 	
 private:
 	const static float flapSpeed, maxSpeed, gravity;

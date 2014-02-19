@@ -134,6 +134,15 @@ const Rectangle& Bird::getBounds() const {
 	return bounds;
 }
 
+Rectangle Bird::getBBox() const {
+	// Bounding box is a square of dimensions width X width.
+	// Makes it easier to work with in terms of rotation, and
+	// still quite accurate.
+	float diff = bounds.width - bounds.height;
+	return Rectangle(bounds.x + diff / 2, bounds.y,
+	                 bounds.height, bounds.height);
+}
+
 
 float Bird::getRotation() const {
 	const float maxrot = M_PI / 10.0f;

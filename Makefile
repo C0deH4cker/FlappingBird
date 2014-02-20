@@ -22,7 +22,7 @@ CXXFLAGS := -Wall \
 	-Wuninitialized \
 	-Wno-reorder
 
-override CXXFLAGS += -std=c++11 -I./$(SGE)/include
+override CXXFLAGS += -std=c++11 -I./$(SGE)/build/include
 
 GLFWDEPS = $(shell grep Libs.private $(SGE)/glfw/src/glfw3.pc | cut -d' ' -f2-)
 

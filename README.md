@@ -20,7 +20,7 @@ GIF:
 
 Just clone this repo, then run the following commands:
 
-    git submodule update --init
+    git submodule update --init --recursive
     make
 
 And that's it! Now just run `./flappingbird` to play!

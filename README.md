@@ -18,9 +18,10 @@ GIF:
 
 ## Building ##
 
-Just clone this repo, then run the following commands:
+To build this project, simply run the following shell commands:
 
-    git submodule update --init --recursive
+    git clone --recurse-submodules https://github.com/C0deH4cker/FlappingBird
+    cd FlappingBird
     make
 
 And that's it! Now just run `./flappingbird` to play!

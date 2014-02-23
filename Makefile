@@ -24,7 +24,7 @@ CXXFLAGS := -Wall \
 
 override CXXFLAGS += -std=c++11 -I./$(SGE)/build/include
 
-GLFWDEPS = $(shell grep Libs.private $(SGE)/glfw/src/glfw3.pc | cut -d' ' -f2-)
+GLFWDEPS = $(shell grep Libs.private $(SGE)/build/glfw/src/glfw3.pc | cut -d' ' -f2-)
 
 all: $(GAME)
 

@@ -20,15 +20,15 @@ const float w = 7.0f, h = 10.0f;
 Score::Score(const Texture2D* sprites)
 : value(0), digits{
 	{sprites, {288.0f, 100.0f, w, h}}, // 0
-	{sprites, {289.0f, 118.0f, w, h}}, // 1
-	{sprites, {289.0f, 134.0f, w, h}}, // 2
-	{sprites, {289.0f, 150.0f, w, h}}, // 3
-	{sprites, {287.0f, 173.0f, w, h}}, // 4
-	{sprites, {287.0f, 185.0f, w, h}}, // 5
-	{sprites, {165.0f, 245.0f, w, h}}, // 6
-	{sprites, {175.0f, 245.0f, w, h}}, // 7
-	{sprites, {185.0f, 245.0f, w, h}}, // 8
-	{sprites, {195.0f, 245.0f, w, h}}  // 9
+	{sprites, {289.0f, 118.0f, w, h}}, // 100
+	{sprites, {289.0f, 134.0f, w, h}}, // 200
+	{sprites, {289.0f, 150.0f, w, h}}, // 300
+	{sprites, {287.0f, 173.0f, w, h}}, // 400
+	{sprites, {287.0f, 185.0f, w, h}}, // 500
+	{sprites, {165.0f, 245.0f, w, h}}, // 600
+	{sprites, {175.0f, 245.0f, w, h}}, // 700
+	{sprites, {185.0f, 245.0f, w, h}}, // 800
+	{sprites, {195.0f, 245.0f, w, h}}  // 900
 } {}
 
 Score& Score::operator=(int points) {

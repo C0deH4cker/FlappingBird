@@ -25,7 +25,7 @@ public:
 private:
 	const static float spacing, scale;
 	int value;
-	Sprite digits[10];
+	Sprite digits[1000];
 };
 
 

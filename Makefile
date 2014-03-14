@@ -40,7 +40,7 @@ $(LIBSGE):
 	$(MAKE) -C $(SGE)
 
 $(GAME): $(LIBSGE) $(OBJS) | spritesheet.png
-	$(CXX) -o $@ $^ $(GLFWDEPS) $(LDFLAGS)
+	g++ -o flappingbird build/Bird.o build/FlappingBird.o build/Level.o build/main.o build/Pipe.o build/Score.o  -lrt -l:SimpleGameEngine/build/libsge.a -lm -lXext -glx -lglut -lXrandr
 
 $(BUILD)/%.o: %.cpp | $(BUILD)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)

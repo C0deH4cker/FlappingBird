@@ -1,3 +1,5 @@
+#g++ -o flappingbird build/Bird.o build/FlappingBird.o build/Level.o build/main.o build/Pipe.o build/Score.o  -lrt -l:SimpleGameEngine/build/libsge.a -lm -lXext -glx -lglut -lXrandr
+
 GAME := flappingbird
 
 BUILD := build

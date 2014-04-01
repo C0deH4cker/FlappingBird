@@ -203,7 +203,7 @@ void Level::increaseSpread() {
 }
 
 void Level::decreaseDistance() {
-	if(pipeDistance>120)
+	if(pipeDistance<120)
 		pipeDistance-=80.0f;
 }
 

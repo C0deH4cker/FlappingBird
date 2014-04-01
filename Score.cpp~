@@ -37,10 +37,10 @@ Score& Score::operator=(int points) {
 }
 
 Score& Score::operator++() {
-	if(value >=2 && value <7)
+	if(value >=5 && value <30)
 	{
 		value = value + 5;
-	}else if(value >= 7){
+	}else if(value >= 30){
 		value = value +10;
 	}else{
 	value= value +1;

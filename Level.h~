@@ -35,7 +35,7 @@ public:
 	void resume();
 	bool isPaused() const;
 	void restart();
-	void decreaseSpread();
+	void lowerSpread();
 	void increaseSpread();
 	void decreaseDistance();
 	void increaseDistance();

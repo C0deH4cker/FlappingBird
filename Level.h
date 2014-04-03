@@ -14,14 +14,15 @@
 #include <sge.h>
 #include "Pipe.h"
 #include "Score.h"
+#include "PowerUp.h"
 
 using namespace sge;
 
 class Level {
 public:
 	const static int scrollSpeed;
-	const static float pipeDistance;
-	const static float pipeSpread;
+	static float pipeSpread;
+	static float pipeDistance;
 	
 	Level(const Content& content, Rectangle bounds);
 	~Level();
@@ -34,11 +35,18 @@ public:
 	void resume();
 	bool isPaused() const;
 	void restart();
+	void decreaseSpread();
+	void increaseSpread();
+	void decreaseDistance();
+	void increaseDistance();
+	float getSpread();
+
 	
 private:
 	Bird* bird;
 	bool paused;
 	bool started;
+	
 	
 	Rectangle viewport;
 	Texture2D* sprites;
@@ -47,14 +55,17 @@ private:
 	Sprite pipeTop;
 	Sprite pipeBottom;
 	Sprite ground;
+	Sprite feather;
 	Rectangle groundRect;
 	
 	float distance;
 	std::list<Pipe*> pipes;
+	std::list<PowerUp*> pups;
 	std::mt19937 rng;
 	std::uniform_real_distribution<float> distribution;
 	
 	void addPipe(float scrolled);
+	void addPowerUp(float scrolled);
 	void showScore();
 };
 

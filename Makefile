@@ -1,3 +1,5 @@
+#g++ -o flappingbird build/Bird.o build/FlappingBird.o build/Level.o build/main.o build/Pipe.o build/Score.o  -lrt -l:SimpleGameEngine/build/libsge.a -lm -lXext -glx -lglut -lXrandr
+
 GAME := flappingbird
 
 BUILD := build
@@ -31,14 +33,11 @@ all: $(GAME)
 $(BUILD):
 	mkdir -p $(BUILD)
 
-spritesheet.png:
-	curl -o $@ http://www.spriters-resource.com/resources/sheets/56/59537.png
-
 $(LIBSGE):
 	$(MAKE) -C $(SGE)
 
-$(GAME): $(LIBSGE) $(OBJS) | spritesheet.png
-	$(CXX) -o $@ $^ $(GLFWDEPS) $(LDFLAGS)
+$(GAME): $(LIBSGE) $(OBJS)
+	g++ -o flappingbird build/Bird.o build/FlappingBird.o build/Level.o build/main.o build/Pipe.o build/Score.o build/PowerUp.o  -lrt -l:SimpleGameEngine/build/libsge.a -lm -lXext -glx -lglut -lXrandr
 
 $(BUILD)/%.o: %.cpp | $(BUILD)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)

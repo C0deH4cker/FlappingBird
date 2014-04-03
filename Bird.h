@@ -26,7 +26,10 @@ public:
 	void pause();
 	void resume();
 	
+	void addSlowedTime(float time);
+
 	bool isDead() const;
+	bool isSlowed() const;
 	
 	const Rectangle& getBounds() const;
 	Rectangle getBBox() const;
@@ -43,6 +46,7 @@ private:
 	int curFrame;
 	Timer timer, wingTimer;
 	Sprite frames[3];
+	float slowedTime;
 	
 	float getRotation() const;
 	void setFlapsPerSec(double fps);

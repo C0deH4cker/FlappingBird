@@ -16,7 +16,7 @@ using namespace sge;
 
 class Pipe {
 public:
-	Pipe(const Vector2& pos, const Sprite* topImage, const Sprite* bottomImage);
+	Pipe(const Vector2& pos, const Sprite* topImage, const Sprite* bottomImage, float pipeSpread);
 	
 	void scroll(float x);
 	void draw();

@@ -24,7 +24,7 @@ const int POSCOUNT = 10;
 
 Bird::Bird(const Texture2D* sprites, float groundHeight)
 : speed(0.0f), ground(groundHeight), dead(false), started(false), paused(false),
-curFrame(0), fps(POSCOUNT * defaultFps), extra(0.0), onGround(false),
+curFrame(0), fps(POSCOUNT * defaultFps), extra(0.0), onGround(false), slowedTime(0.0),
 frames{
 	{sprites, {223.0f, 124.0f, w, h}}, // wing down
 	{sprites, {264.0f,  90.0f, w, h}}, // wing center
@@ -43,6 +43,10 @@ frames{
 }
 
 void Bird::update(double deltaTime) {
+	if (slowedTime > 0.0f) {
+		slowedTime -= deltaTime;
+	}
+
 	if(onGround) return;
 	
 	speed += gravity * deltaTime / 2.0f;
@@ -73,6 +77,10 @@ void Bird::draw(double deltaTime) {
 		double val = elapsed - offset;
 		double freq = CLAMP(maxFps - coef * val*val, 0.0f, maxFps);
 		
+		if (isSlowed()) {
+			freq = freq*0.25f;
+		}
+
 		setFlapsPerSec(freq);
 		
 		i = getFrame();
@@ -112,6 +120,7 @@ void Bird::reset() {
 	started = false;
 	paused = false;
 	onGround = false;
+	slowedTime = 0.0f;
 }
 
 void Bird::pause() {
@@ -126,9 +135,21 @@ void Bird::resume() {
 	paused = false;
 }
 
+void Bird::addSlowedTime(float time) {
+	slowedTime += time;
+}
+
 bool Bird::isDead() const {
 	return dead;
 }
+
+bool Bird::isSlowed() const {
+	if (slowedTime > 0.0f) {
+		return true;
+	}
+	return false;
+}
+
 
 const Rectangle& Bird::getBounds() const {
 	return bounds;
@@ -153,8 +174,10 @@ float Bird::getRotation() const {
 	
 	if(onGround)
 		return minrot;
+
+	float factor = isSlowed() ? 0.25 : 1;
 	
-	float val = MAX(timer.elapsed() - offset, 0.0f);
+	float val = MAX(timer.elapsed()*factor - offset, 0.0f);
 	
 	return CLAMP(maxrot - coef * val*val, minrot, maxrot);
 }

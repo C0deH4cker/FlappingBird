@@ -13,15 +13,15 @@
 using namespace sge;
 
 
-Pipe::Pipe(const Vector2& pos, const Sprite* topImage, const Sprite* bottomImage)
+Pipe::Pipe(const Vector2& pos, const Sprite* topImage, const Sprite* bottomImage, float pipeSpread)
 : top(topImage), bottom(bottomImage), scored(false) {
 	topRect    = Rectangle(pos.x,
-						   pos.y - 3.0f * top->getHeight() - Level::pipeSpread,
+						   pos.y - 3.0f * top->getHeight() - pipeSpread,
 						   3.0f * top->getWidth(),
 						   3.0f * top->getHeight());
 	
 	bottomRect = Rectangle(topRect.x,
-						   pos.y + Level::pipeSpread,
+						   pos.y + pipeSpread,
 						   3.0f * bottom->getWidth(),
 						   3.0f * bottom->getHeight());
 }

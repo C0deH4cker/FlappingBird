@@ -59,10 +59,10 @@ bool Pipe::collides(const Bird* bird) const {
 		float radius = rect.width / 2.0f;
 		float r2 = radius*radius;
 		
-		if(center.sqrdistance(topRect.bottomLeft()) > r2 &&
-		   center.sqrdistance(bottomRect.bottomLeft()) > r2 &&
-		   center.sqrdistance(topRect.bottomLeft()) > r2 &&
-		   center.sqrdistance(bottomRect.topRight()) > r2) {
+		if(center.sqrdistance(topRect.bottomLeft()) < r2 ||
+		   center.sqrdistance(bottomRect.topLeft()) < r2 ||
+		   center.sqrdistance(topRect.bottomRight()) < r2 ||
+		   center.sqrdistance(bottomRect.topRight()) < r2) {
 			return true;
 		}
 	}

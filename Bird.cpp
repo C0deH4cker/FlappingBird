@@ -14,7 +14,7 @@
 using namespace sge;
 
 
-const float Bird::flapSpeed = -530.0f;
+const float Bird::flapSpeed = -515.0f;
 const float Bird::maxSpeed = 680.0f;
 const float Bird::gravity = 2000.0f;
 const double Bird::defaultFps = 2.0;

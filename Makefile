@@ -20,8 +20,9 @@ CXXFLAGS := -Wall \
 	-Wmissing-include-dirs \
 	-Wno-unused-parameter \
 	-Wuninitialized \
-	-Wno-reorder
+	-Wno-reorder \
 
+LDFLAGS := -pthread -lGL -lGLU -lX11 -lXext -lm -lXxf86vm -lXrandr -lXi
 override CXXFLAGS += -std=c++11 -I./$(SGE)/build/include
 
 GLFWDEPS = $(shell grep Libs.private $(SGE)/build/glfw/src/glfw3.pc | cut -d' ' -f2-)
@@ -38,7 +39,7 @@ $(LIBSGE):
 	$(MAKE) -C $(SGE)
 
 $(GAME): $(LIBSGE) $(OBJS) | spritesheet.png
-	$(CXX) -o $@ $^ $(GLFWDEPS) $(LDFLAGS)
+	$(CXX) -o $@ $^ $(GLFWDEPS) $(LDFLAGS) $(LIBSGE)
 
 $(BUILD)/%.o: %.cpp | $(BUILD)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
